@@ -45,6 +45,7 @@
       },
       {
         "text": "i'm looking for information about",
+	"variable_name = tracker.latest_message['entities']"
         "intent": "variable_search",
         "entities": []
       },
