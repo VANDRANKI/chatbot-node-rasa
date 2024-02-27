@@ -1,38 +1,45 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 
 <head>
   <title>BIRD ChatBot</title>
+  <!-- Link to custom CSS file for styling -->
   <link rel="stylesheet" type="text/css" href="chat.css">
+  <!-- Link to Google Fonts for typography -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600%7CRoboto:300,400,500" media="all">
+  <!-- Link to Switchery CSS for toggle switch -->
   <link rel="stylesheet" href="switchery.min.css" />
+  <!-- Link to Loaders CSS for loading animations -->
   <link rel="stylesheet" type="text/css" href="loaders.min.css">
 </head>
-<script src="/socket.io/socket.io.js"></script>
-<script src="jquery-3.2.1.min.js"></script>
-<script src="chat.js"></script>
-<script src="moment.min.js"></script>
-<script src="switchery.min.js"></script>
 
 <body>
+  <!-- Chat window container -->
   <div class="chat_window">
+    <!-- Top menu bar -->
     <div class="top_menu">
+      <!-- Theme switch toggle -->
       <div class="toggle">
         <label class="toggle-wrapper"> Theme
           <input type="checkbox" class="js-theme-switch" checked />
         </label>
       </div>
+      <!-- ChatBot title -->
       <div class="title">BIRD ChatBot</div>
+      <!-- Help switch toggle -->
       <div class="toggle">
         <label class="toggle-wrapper" id="help-toggle"  style="display:none;"> Help with the development
           <input type="checkbox" class="js-help-switch" checked />
+          <!-- Tooltip for help switch -->
           <div class="toggle-tooltip" style="display:none;"> You can help! 
             <div class="close" data-dynamite-selected="true">x</div>
           </div>
         </label>
       </div>
     </div>
+    <!-- Messages container -->
     <ul class="messages scrollbar-custom theme1"></ul>
+    <!-- Message input and send button -->
     <div class="bottom_wrapper clearfix">
       <div class="message_input_wrapper">
         <input class="message_input" placeholder="Type your message here..." />
@@ -43,35 +50,50 @@
       </div>
     </div>
   </div>
+  <!-- Message template for displaying messages -->
   <div class="message_template">
     <li class="message">
+      <!-- Feedback wrapper for user feedback -->
       <div class="text_wrapper feedback" id="wrapper" style="width: 0px; opacity: 0;">
         <div class="intent-info"  style="display: none">
           <form id="question">
             <p>Feedback Question</p>
-          <span class="intent">intent name</span>
+            <!-- Placeholder for intent name -->
+            <span class="intent">intent name</span>
+            <!-- Feedback buttons -->
             <div class="feedback-btn-container">
               <span class="feedback_yes btn green">✓</span>
               <span class="feedback_no btn red">X</span>
             </div>
-            </form>
           </form>
         </div>
       </div>
+      <!-- Avatar icon -->
       <div class="avatar"></div>
+      <!-- Message text and timestamp -->
       <div class="text_wrapper">
         <div class="text"></div>
         <div class="message-time"></div>
       </div>
     </li>
-  </div>  
-  <div id="checkTemplate" style="display:none">
-    <div id ="checkYes" style="display:none">
-      <svg class="checkmark positive" id="check-1" viewBox="0 0 52 52"><circle class="circle positive" cx="26" cy="26" r="25" fill="none"/><path class="check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/></svg> </div>
-      <div id ="checkNo" style="display:none">
-      <svg class="checkmark negative" id="check-1" viewBox="0 0 52 52"><circle class="circle negative" cx="26" cy="26" r="25" fill="none"/><path class="check" fill="none" d="M13 13 L38 38 M13 38 L38 13"/></svg> </div>
   </div>
+  <!-- Checkmark template for feedback confirmation -->
+  <div id="checkTemplate" style="display:none">
+    <!-- Checkmark for positive feedback -->
+    <div id ="checkYes" style="display:none">
+      <svg class="checkmark positive" id="check-1" viewBox="0 0 52 52"><circle class="circle positive" cx="26" cy="26" r="25" fill="none"/><path class="check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/></svg>
+    </div>
+    <!-- Checkmark for negative feedback -->
+    <div id ="checkNo" style="display:none">
+      <svg class="checkmark negative" id="check-1" viewBox="0 0 52 52"><circle class="circle negative" cx="26" cy="26" r="25" fill="none"/><path class="check" fill="none" d="M13 13 L38 38 M13 38 L38 13"/></svg>
+    </div>
+  </div>
+  <!-- Scripts for Socket.io, jQuery, chat functionality, moment.js, and Switchery -->
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="jquery-3.2.1.min.js"></script>
+  <script src="chat.js"></script>
+  <script src="moment.min.js"></script>
+  <script src="switchery.min.js"></script>
 </body>
-
 
 </html>
