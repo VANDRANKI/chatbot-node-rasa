@@ -18,7 +18,6 @@
         this.draw = function (_this) {
             return function () {
                 var $message = $($('.message_template').clone().html()); //Create the new message starting from the template
-
                 if (_this.sender === "bot") {
                     if (_this.originalMessage === "init") {
                         $message.find("#wrapper.feedback").text("");
@@ -42,7 +41,6 @@
                             $message.prepend($('.message_template #wrapper.feedback').clone());
                             $message.find(".message-time").show();*/
                         }
-
                         $message.attr("replyId", replyId++);
                         $message.find(".intent-info").find(".intent").text(_this.intent);
                         $message.find(".intent-info").find("#question p").text("Did I understand correctly?");
@@ -58,7 +56,6 @@
                     //$message.find("#wrapper.feedback").remove();
                     $message.attr("messageId", messageId++);
                 }
-
                 $message.addClass(_this.message_side).find('.text').html(_this.text);
                 $message.find(".avatar").attr('class', 'transparent avatar'); //I want the avatar to be transparent
                 //I am getting the class of the last message received, if it's NOT on the same side as the one I want to append
@@ -88,26 +85,21 @@
         }(this);
         return this;
     };
-
     $(function () {
         var getMessageText, message_side, sendMessage;
         var message_side = 'right';
         const messageChannel = 'message';
         const replyChannel = 'reply';
         var socket = io();
-
         socket.on(replyChannel, function (jsonObj) {
             console.log("Received a reply from bot: ");
             console.log(jsonObj);
             appendMessage(jsonObj.reply, "bot", jsonObj.intent.name, jsonObj.message);
         });
-
         socket.on(messageChannel, function (msg, isUser) {
             console.log("Received a message: " + msg);
             appendMessage(text, "user", "");
         });
-
-
         sendMessage = function (text) {
             var message_input = $('.message_input');
             var messageText = message_input.val().trim();
@@ -123,20 +115,16 @@
             });
             appendMessage(messageText, "user", "");
         };
-
         appendMessage = function (text, from, intentTxt, originalMessage) {
             //IF the message is empty, do nothing
             if (text.trim() === '') {
                 return;
             }
-
             var $messages, message;
-
             $messages = $('.messages');
             //IF the message is from the bot, then the bubble should be on the left
             //Otherwise if the message is from the user, it should be on the right
             message_side = from === 'bot' ? 'left' : 'right';
-
             //Let's create the new message object, with its text and its side and then draw it
             message = new Message({
                 text: text,
@@ -146,17 +134,14 @@
                 originalMessage: originalMessage
             });
             message.draw();
-
             //We animate the message box to scroll down by the height of the message, to show it all
             return $messages.animate({
                 scrollTop: $messages.prop('scrollHeight')
             }, 100);
         }
-
         $('.send_message').click(function (e) {
             return sendMessage();
         });
-
         $('.message_input').keyup(function (e) {
             if (e.which === 13) {
                 return sendMessage();
@@ -170,16 +155,12 @@
         return setTimeout(function () {
             return sendMessage('I\'m fine, thank you!');
         }, 2000);*/
-
-
         var helpSwitch = document.querySelector('.js-help-switch');
         var init = new Switchery(helpSwitch);
         init.setPosition(true);
-
         var themeSwitch = document.querySelector('.js-theme-switch');
         var init2 = new Switchery(themeSwitch,  {jackSecondaryColor: '#b1e0f9', secondaryColor: '#fdd5a9', jackColor: '#ded9d9', color: '#5773ff'});
         init2.setPosition(true);
-
         helpSwitch.addEventListener('click',function () {
             console.log("Feedback toggle");
             $('#help-toggle .toggle-tooltip').fadeOut();
@@ -194,13 +175,11 @@
                         //feedbackMessage.find(".intent").hide(0);
                         feedbackMessage.animate({width: 0}, 150);  
                     });  
-
                     feedbackMessage.not(".empty").filter("#sent").animate({opacity: 0}, 50, function(){
                         feedbackMessage.find(".intent-info").hide(0);
                         feedbackMessage.find(".intent").hide(0);
                         feedbackMessage.animate({width: 15}, 150);  
                     });  
-
                     //since the empty messages don't animate the opacity, bu they also hide the content (if any) and reduce the size
                     //we set a timeout which starts exactly after the animation for the non-empty elements and does the same thing
                     setTimeout(function(){
@@ -215,7 +194,6 @@
                         feedbackMessage.find(".intent-info").show(0);
                         feedbackMessage.not(".empty").animate({opacity: 1}, 200);
                     });
-
                     feedbackMessage.filter("#sent").animate({width: 250}, 150, function(){
                         feedbackMessage.find(".intent").show(0);
                         feedbackMessage.not(".empty").animate({opacity: 1}, 200);
@@ -223,7 +201,6 @@
                 }
             });
         });
-
         themeSwitch.addEventListener('click', function () {
             var messagesContainer = $(".messages");
             if(messagesContainer.hasClass("theme1")){
@@ -235,7 +212,6 @@
                 messagesContainer.removeClass("theme2").addClass("theme1");
             }
         });
-
         //Note: the .click() or .on('click') function DOES NOT WORK
         //When an element is dynamically inserted into the DOM, this is because the event handler
         //is attached right after the DOM is completely loaded, so if I add elements after the DOM has been loaded
@@ -265,7 +241,6 @@
             });
             socket.emit(replyChannel, message, intent, true);
         });
-
         $('.messages').on('click', "span.feedback_no", function () {
             var intent = $(this).parent().parent().find(".intent").text(); //From the yes button I am climbing up the DOM until I am in the form with class "feedback" which contains the a element with the class "intent"
             var $message = $(this).parent().parent().parent().parent().parent();
@@ -289,16 +264,13 @@
             });
             socket.emit(replyChannel, message, intent, false);
         });
-
         $('#help-toggle .toggle-tooltip .close').on('click', function() {
             $('#help-toggle .toggle-tooltip').fadeOut(150);
             showHelpTooltip = false;
             event.preventDefault();
         })
-
         $('#help-toggle .toggle-tooltip').on('click', function() {
             event.preventDefault();
         })
     });
-
 }.call(this));
