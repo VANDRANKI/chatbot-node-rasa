@@ -91,3 +91,12 @@ The CSS is also fairly simple, maybe the trickiest part was to make an animated 
 
 The Javascript side `chat.js` is where everything happens. When the DOM is ready, socket.io is loaded and two listeners are open, waiting for messages to be received on the two channels.
 The function `appendMessage()` is the main one which creates the Message object from the newly received message and appends it to the conversation. 
+
+
+# Future Scope
+`Integration with more platforms`: Extending the chatbot's reach by integrating with more communication platforms like WhatsApp, Facebook Messenger, or Telegram.
+`Advanced Natural Language Understanding (NLU)`: Enhancing the chatbot's understanding capabilities by using more advanced NLU techniques or incorporating additional training data.
+`Voice interaction capabilities`: Adding voice recognition and response capabilities to make the chatbot accessible via voice, enhancing user experience.
+`Analytics and feedback system`: Implementing an analytics system to track user interactions and feedback to continuously improve the chatbot's responses and functionality.
+`Multi-language support`: Developing the chatbot to support multiple languages to cater to a wider audience.
+`Personalization`: Enhancing the chatbot to offer personalized recommendations or responses based on user history or preferences.
